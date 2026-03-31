@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>AI 线性回归预测项目</title>
+  <style>
+    body{padding: 30px; font-family: system-ui;}
+    .box{border:1px solid #aaa; padding:20px; margin:20px 0; border-radius:8px;}
+  </style>
+</head>
+<body>
+  <h1>AI 线性回归预测 & 参数优化系统</h1>
+
+  <h2>学号：423240644</h2>
+  <h2>姓名：蔡圳锐</h2>
+
+  <div class="box">
+    <h3>项目说明</h3>
+    <p>本项目为前端 AI 项目，使用线性回归算法做数据预测，属于机器学习基础应用。</p>
+    <p>可迁移、可部署、可调整参数优化预测效果。</p>
+  </div>
+
+  <div class="box">
+    <h3>可调参数</h3>
+    <p>学习率、迭代次数、训练数据，均可修改优化模型。</p>
+  </div>
+
+  <div class="box">
+    <h3>AI 运行结果</h3>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    // 最简单的 AI 线性回归
+    function trainAI(learningRate = 0.01, epochs = 200) {
+      let w = 0, b = 0;
+      const x = [1,2,3,4,5];
+      const y = [2,4,6,8,10];
+
+      for (let i=0; i<epochs; i++) {
+        let dw=0, db=0;
+        for (let j=0; j<x.length; j++) {
+          const pred = w*x[j] + b;
+          dw += (pred - y[j]) * x[j];
+          db += (pred - y[j]);
+        }
+        w -= learningRate * dw / x.length;
+        b -= learningRate * db / x.length;
+      }
+
+      return `训练完成！
+      学习率：${learningRate}
+      迭代次数：${epochs}
+      训练后权重 w=${w.toFixed(2)}, b=${b.toFixed(2)}
+      预测：输入 6 → 输出 ${(w*6+b).toFixed(1)}`;
+    }
+
+    // 运行 AI
+    document.getElementById("result").innerText = trainAI(0.01, 300);
+  </script>
+</body>
+</html>
